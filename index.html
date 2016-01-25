@@ -45,6 +45,7 @@
             </div> 
         </div>
         <p ng-show="news.length>0">&nbsp;Новостей в выборке: <b>{{news.length}}<span ng-show="loadMore">+</span></b></p>
+		<!--Tabs for future use-->
         <!--ul class="nav nav-pills">
             <li role="presentation" ng-class="{'active': selectedView === 'table'}" ng-click="selectedView = 'table'"><a href="#">Список</a></li>
             <li role="presentation" ng-class="{'active': selectedView === 'chart'}" ng-click="selectedView = 'chart'"><a href="#">График</a></li>
@@ -64,8 +65,5 @@
             </tr>
         </table>
         <button class="btn btn-block" ng-show="loadMore" ng-click="getNews(news.length)">Загрузить больше</button>
-        <!--div class="well" ng-show="selectedView === 'chart'">
-            
-        </div-->
     </body>
 </html>

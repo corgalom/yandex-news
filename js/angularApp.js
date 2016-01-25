@@ -44,5 +44,7 @@ app.controller('MainController', function ($scope, $http) {
             console.log(error);
         });
     };
+	
+	//init
     $scope.getNews();
 });
