@@ -1,5 +1,5 @@
 # yandex-news
-<h1>Yandex News archive Frontend</h1>
+<h1>Yandex News archive / Frontend part</h1>
 
 <p>This is an <a href="http://yandex.ru">Yandex</a> news archive. This is made for searching through Russian media sources which are noticed in heavy propaganda use.</p>
 
