@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="yandexNews">
+    <head>
+        <meta charset="utf-8">
+        <title>Яндекс.Архив</title>
+
+        <!--Bootstrap and style-->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- AngularJs and app js -->
+        <script src="js/angular.min.js"></script>
+        <script src="js/angularApp.js"></script>
+    </head>
+
+    <body ng-controller="MainController">
+        <div class="well help" ng-show="showHelp">
+            <p>Архив Яндекс-новостей. Первая новость добавлена 7 сентября 2015 года.</p>
+            <p>Введите запрос, чтобы искать по ключевым словам. Количество результатов ограничено сотней, но всегда можно загрузить ещё.</p>
+            <p>Это тестовая версия. Информацию об ошибках, пожелания и предложения, пожалуйста, не отправляйте.</p>
+            <button class="btn btn-block btn-success" ng-click="showHelp = false">Закрыть</button>
+        </div>
+        <div class="container-fluid ya-background header">
+            Архив <span class="color-red" ng-click="showHelp = true">Я</span>ндекс-новостей
+        </div>
+        <div class="space-wrap"></div>
+        <div class="well">
+            <p>Выберите тему из предложенных:</p>
+            <button class="btn btn-default button-suggest" ng-repeat="theme in suggested" ng-bind="theme" ng-class="{'active': theme === searchQuery}" ng-click="selectSuggested(theme)"></button>
+            <div class="space-wrap"></div>
+            <p>или введите запрос самостоятельно:</p>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Поиск..." ng-model="searchQuery">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="getNews()">Поиск</button>
+                </span>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="caseOption"> Учитывать регистр
+                </label>
+            </div>
+            <div ng-show="loading">
+                <span class="glyphicon glyphicon-refresh spinning"></span> Загрузка...
+            </div> 
+        </div>
+        <p ng-show="news.length>0">&nbsp;Новостей в выборке: <b>{{news.length}}<span ng-show="loadMore">+</span></b></p>
+        <!--ul class="nav nav-pills">
+            <li role="presentation" ng-class="{'active': selectedView === 'table'}" ng-click="selectedView = 'table'"><a href="#">Список</a></li>
+            <li role="presentation" ng-class="{'active': selectedView === 'chart'}" ng-click="selectedView = 'chart'"><a href="#">График</a></li>
+        </ul-->
+        <table class="table" ng-show="selectedView === 'table'">
+            <tr>
+                <td><b>№</b></td>
+                <td><b>Заголовок</b></td>
+                <td><b>Текст новости</b></td>
+                <td><b>Дата</b></td>
+            </tr>
+            <tr ng-repeat="new in news">
+                <td>{{$index + 1}}</td>
+                <td ng-bind="new.Name"></td>
+                <td ng-bind="new.Description"></td>
+                <td><a ng-href="{{new.url}}" ng-bind="new.Date.slice(0, -5)" target="_blank"></a></td>
+            </tr>
+        </table>
+        <button class="btn btn-block" ng-show="loadMore" ng-click="getNews(news.length)">Загрузить больше</button>
+        <!--div class="well" ng-show="selectedView === 'chart'">
+            
+        </div-->
+    </body>
+</html>
